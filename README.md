@@ -1,71 +1,78 @@
-# README
+# NBS Data Preprocessing
+
+A Python toolkit for preprocessing data downloaded from the National Bureau of Statistics of China.
+
+---
 
 ## 中文说明
 
 ### 项目简介
 
-本项目旨在对 **国家统计局 (National Bureau of Statistics, NBS)** 网站下载的数据进行格式转换与预处理，以便后续进行面板数据 (panel data) 分析。主要功能包括：
+本项目提供一套完整的数据预处理流程，用于处理从**国家统计局 (National Bureau of Statistics, NBS)** 网站下载的数据，将其转换为适合面板数据分析的格式。
 
-1. 将指定文件夹内的所有 `.xls` 文件批量转换为 `.xlsx` 格式。
-2. 读取特定文件夹下的 `.xlsx` 文件，删除每个文件的第一行，并将所有文件合并到一个总文件中。
-3. 将合并后的数据转换为长格式 (long format)，形成标准的面板数据结构。
+### 主要功能
 
-### 文件结构与功能
+1. **格式转换**: 将 `.xls` 文件批量转换为 `.xlsx` 格式
+2. **数据合并**: 读取多个 `.xlsx` 文件，删除首行后合并到一个文件的不同工作表中
+3. **面板数据转换**: 将宽格式数据转换为长格式面板数据
 
-* **convert\_xls\_to\_xlsx.py**
-  将文件夹中的 `.xls` 文件批量转换为 `.xlsx` 格式。
+### 文件结构
 
-* **merge\_xlsx\_files.py**
-  遍历文件夹内的 `.xlsx` 文件，删除第一行后，分别写入合并文件中的不同工作表。
-
-* **transform\_to\_panel.py**
-  将合并后的 `.xlsx` 文件中的各个工作表转化为长格式数据，并分别保存为新的面板数据文件。
+| 文件 | 功能 |
+|------|------|
+| `Covert xls to xlsx.py` | 批量转换 `.xls` 到 `.xlsx` 格式 |
+| `delete and combine.py` | 删除文件首行并合并到一个Excel文件 |
+| `panel.py` | 将合并数据转换为长格式面板数据 |
+| `Provin Name.txt` | 省份名称中英文对照表 |
 
 ### 使用方法
 
-1. 修改脚本中的 `input_folder` 和 `output_file` 路径为本地路径。
-2. 先运行 `convert_xls_to_xlsx.py`，将 `.xls` 文件转换为 `.xlsx` 文件。
-3. 再运行 `merge_xlsx_files.py`，合并 `.xlsx` 文件。
-4. 最后运行 `transform_to_panel.py`，生成面板数据文件。
+1. **准备数据**: 将从国家统计局下载的 `.xls` 文件放入指定文件夹
+2. **格式转换**: 运行 `Covert xls to xlsx.py`，修改 `input_folder` 路径
+3. **合并文件**: 运行 `delete and combine.py`，修改 `input_folder` 和 `output_file` 路径
+4. **生成面板数据**: 运行 `panel.py`，修改 `file_path` 路径
 
-### 注意事项
+### 依赖
 
-* 考虑到 **国家统计局英文版网站访问速度较慢**，推荐使用 **中文版网站** 下载数据。
-* 中文版数据中的省份名称可以手动替换为英文。参考如下映射表：
+- Python 3.x
+- pandas
+- openpyxl
 
-| 中文名称 | English Name   |
-| ---- | -------------- |
-| 北京   | Beijing        |
-| 天津   | Tianjin        |
-| 河北   | Hebei          |
-| 山西   | Shanxi         |
-| 内蒙古  | Inner Mongolia |
-| 辽宁   | Liaoning       |
-| 吉林   | Jilin          |
-| 黑龙江  | Heilongjiang   |
-| 上海   | Shanghai       |
-| 江苏   | Jiangsu        |
-| 浙江   | Zhejiang       |
-| 安徽   | Anhui          |
-| 福建   | Fujian         |
-| 江西   | Jiangxi        |
-| 山东   | Shandong       |
-| 河南   | Henan          |
-| 湖北   | Hubei          |
-| 湖南   | Hunan          |
-| 广东   | Guangdong      |
-| 广西   | Guangxi        |
-| 海南   | Hainan         |
-| 重庆   | Chongqing      |
-| 四川   | Sichuan        |
-| 贵州   | Guizhou        |
-| 云南   | Yunnan         |
-| 西藏   | Tibet          |
-| 陕西   | Shaanxi        |
-| 甘肃   | Gansu          |
-| 青海   | Qinghai        |
-| 宁夏   | Ningxia        |
-| 新疆   | Xinjiang       |
+### 省份名称映射
+
+| 中文名称 | English Name |
+|----------|--------------|
+| 北京 | Beijing |
+| 天津 | Tianjin |
+| 河北 | Hebei |
+| 山西 | Shanxi |
+| 内蒙古 | Inner Mongolia |
+| 辽宁 | Liaoning |
+| 吉林 | Jilin |
+| 黑龙江 | Heilongjiang |
+| 上海 | Shanghai |
+| 江苏 | Jiangsu |
+| 浙江 | Zhejiang |
+| 安徽 | Anhui |
+| 福建 | Fujian |
+| 江西 | Jiangxi |
+| 山东 | Shandong |
+| 河南 | Henan |
+| 湖北 | Hubei |
+| 湖南 | Hunan |
+| 广东 | Guangdong |
+| 广西 | Guangxi |
+| 海南 | Hainan |
+| 重庆 | Chongqing |
+| 四川 | Sichuan |
+| 贵州 | Guizhou |
+| 云南 | Yunnan |
+| 西藏 | Tibet |
+| 陕西 | Shaanxi |
+| 甘肃 | Gansu |
+| 青海 | Qinghai |
+| 宁夏 | Ningxia |
+| 新疆 | Xinjiang |
 
 ---
 
@@ -73,31 +80,37 @@
 
 ### Project Overview
 
-This project is designed to preprocess data downloaded from the **National Bureau of Statistics (NBS)** for further panel data analysis. The pipeline includes:
+This project provides a complete data preprocessing pipeline for handling data downloaded from the **National Bureau of Statistics (NBS)** of China, converting it into a format suitable for panel data analysis.
 
-1. Converting all `.xls` files in a specified folder into `.xlsx` format.
-2. Reading `.xlsx` files in a specified folder, deleting the first row of each file, and merging them into one output file (each sheet corresponds to one source file).
-3. Transforming merged data into **long format (panel data)** suitable for econometric or statistical analysis.
+### Main Features
 
-### File Structure and Functions
+1. **Format Conversion**: Batch convert `.xls` files to `.xlsx` format
+2. **Data Merging**: Read multiple `.xlsx` files, remove the first row, and merge into different sheets of one file
+3. **Panel Data Transformation**: Convert wide-format data to long-format panel data
 
-* **convert\_xls\_to\_xlsx.py**
-  Batch convert `.xls` files into `.xlsx` format.
+### File Structure
 
-* **merge\_xlsx\_files.py**
-  Read `.xlsx` files, remove the first row, and save them into different sheets of one merged file.
-
-* **transform\_to\_panel.py**
-  Transform each sheet of the merged file into long-format panel data, and save each as a new `.xlsx` file.
+| File | Function |
+|------|----------|
+| `Covert xls to xlsx.py` | Batch convert `.xls` to `.xlsx` format |
+| `delete and combine.py` | Remove first row and merge files into one Excel |
+| `panel.py` | Transform merged data into long-format panel data |
+| `Provin Name.txt` | Province name mapping table (Chinese-English) |
 
 ### Usage
 
-1. Update `input_folder` and `output_file` paths in each script to match your local environment.
-2. Run `convert_xls_to_xlsx.py` first to convert `.xls` to `.xlsx`.
-3. Run `merge_xlsx_files.py` to merge processed `.xlsx` files.
-4. Run `transform_to_panel.py` to generate panel data files.
+1. **Prepare Data**: Place downloaded `.xls` files from NBS website into the specified folder
+2. **Convert Format**: Run `Covert xls to xlsx.py`, update `input_folder` path
+3. **Merge Files**: Run `delete and combine.py`, update `input_folder` and `output_file` paths
+4. **Generate Panel Data**: Run `panel.py`, update `file_path`
+
+### Dependencies
+
+- Python 3.x
+- pandas
+- openpyxl
 
 ### Notes
 
-* Since the **English version of the NBS website is slow**, it is recommended to use the **Chinese version** instead.
-* Province names in Chinese data can be manually replaced with English equivalents. A mapping table is provided above.
+- It is recommended to download data from the **Chinese version** of the NBS website for faster access.
+- Province names in Chinese data can be replaced with English equivalents using the mapping table above.
